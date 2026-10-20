@@ -1,0 +1,85 @@
+{
+  "note": "Makespan values are the proven optimum of each instance. They were copied from JSPLIB and then re-checked by solving every instance to proven optimality with OR-Tools CP-SAT (see data/README.md).",
+  "instances_file": "jobshop1.txt (OR-Library, J E Beasley; instances contributed by D. C. Mattfeld and R. J. M. Vaessens)",
+  "values_source": "https://github.com/tamy0612/JSPLIB/blob/master/instances.json",
+  "instances": {
+    "ft06": {
+      "makespan": 55,
+      "optimal": true,
+      "jobs": 6,
+      "machines": 6
+    },
+    "ft10": {
+      "makespan": 930,
+      "optimal": true,
+      "jobs": 10,
+      "machines": 10
+    },
+    "ft20": {
+      "makespan": 1165,
+      "optimal": true,
+      "jobs": 20,
+      "machines": 5
+    },
+    "la01": {
+      "makespan": 666,
+      "optimal": true,
+      "jobs": 10,
+      "machines": 5
+    },
+    "la02": {
+      "makespan": 655,
+      "optimal": true,
+      "jobs": 10,
+      "machines": 5
+    },
+    "la03": {
+      "makespan": 597,
+      "optimal": true,
+      "jobs": 10,
+      "machines": 5
+    },
+    "la04": {
+      "makespan": 590,
+      "optimal": true,
+      "jobs": 10,
+      "machines": 5
+    },
+    "la05": {
+      "makespan": 593,
+      "optimal": true,
+      "jobs": 10,
+      "machines": 5
+    },
+    "la06": {
+      "makespan": 926,
+      "optimal": true,
+      "jobs": 15,
+      "machines": 5
+    },
+    "la07": {
+      "makespan": 890,
+      "optimal": true,
+      "jobs": 15,
+      "machines": 5
+    },
+    "la08": {
+      "makespan": 863,
+      "optimal": true,
+      "jobs": 15,
+      "machines": 5
+    },
+    "la09": {
+      "makespan": 951,
+      "optimal": true,
+      "jobs": 15,
+      "machines": 5
+    },
+    "la10": {
+      "makespan": 958,
+      "optimal": true,
+      "jobs": 15,
+      "machines": 5
+    }
+  }
+}

@@ -1,0 +1,349 @@
+[
+ {
+  "id": 1,
+  "category": "solve",
+  "question": "What is the best makespan you can find for ft06?",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "ft06"
+   }
+  }
+ },
+ {
+  "id": 2,
+  "category": "solve",
+  "question": "Solve la03.",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "la03"
+   }
+  }
+ },
+ {
+  "id": 3,
+  "category": "solve",
+  "question": "Can you work out how fast we could finish all the jobs on the 10 by 10 Fisher-Thompson instance ft10?",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "ft10"
+   }
+  }
+ },
+ {
+  "id": 4,
+  "category": "solve",
+  "question": "How long does the shortest possible schedule for la07 take?",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "la07"
+   }
+  }
+ },
+ {
+  "id": 5,
+  "category": "solve",
+  "question": "I want the plan for ft 20 with the lowest possible finish time.",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "ft20"
+   }
+  }
+ },
+ {
+  "id": 6,
+  "category": "solve",
+  "question": "What makespan can the solver reach on la10, and what is the gap to the best known?",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "la10"
+   }
+  }
+ },
+ {
+  "id": 7,
+  "category": "solve",
+  "question": "Please optimise la01.",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "la01"
+   }
+  }
+ },
+ {
+  "id": 8,
+  "category": "solve",
+  "question": "Any chance you can do better than 700 on la05?",
+  "expected": {
+   "tool": "solve",
+   "arguments": {
+    "instance": "la05"
+   }
+  }
+ },
+ {
+  "id": 9,
+  "category": "compare",
+  "question": "Compare FIFO, SPT and the solver on ft10.",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft10"
+   }
+  }
+ },
+ {
+  "id": 10,
+  "category": "compare",
+  "question": "Is the FIFO rule any good on la02? Compare it with the optimum.",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "la02"
+   }
+  }
+ },
+ {
+  "id": 11,
+  "category": "compare",
+  "question": "How much worse are dispatch rules than CP-SAT on ft06?",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft06"
+   }
+  }
+ },
+ {
+  "id": 12,
+  "category": "compare",
+  "question": "Run a comparison for la08.",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "la08"
+   }
+  }
+ },
+ {
+  "id": 13,
+  "category": "compare",
+  "question": "On la04, would first-in-first-out or shortest-processing-time give the shorter schedule?",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "la04"
+   }
+  }
+ },
+ {
+  "id": 14,
+  "category": "compare",
+  "question": "Show me a table of rule-based schedules versus the solver for ft20.",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft20"
+   }
+  }
+ },
+ {
+  "id": 15,
+  "category": "compare",
+  "question": "How do simple rules do on la06?",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "la06"
+   }
+  }
+ },
+ {
+  "id": 16,
+  "category": "compare",
+  "question": "Is it worth using the solver instead of a basic heuristic on la09?",
+  "expected": {
+   "tool": "compare",
+   "arguments": {
+    "instance": "la09"
+   }
+  }
+ },
+ {
+  "id": 17,
+  "category": "disrupt",
+  "question": "Machine 2 breaks down at time 10 for 15 time units on ft06. What happens to the makespan?",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 15
+   }
+  }
+ },
+ {
+  "id": 18,
+  "category": "disrupt",
+  "question": "On la01, machine 1 is down from time 100 for 50 units. Reschedule.",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la01",
+    "machine": 1,
+    "start": 100,
+    "duration": 50
+   }
+  }
+ },
+ {
+  "id": 19,
+  "category": "disrupt",
+  "question": "ft10: machine 3 fails at 300 and is repaired after 100 time units. How many operations move?",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft10",
+    "machine": 3,
+    "start": 300,
+    "duration": 100
+   }
+  }
+ },
+ {
+  "id": 20,
+  "category": "disrupt",
+  "question": "What if machine 0 stops at time 20 for 30 units on ft06?",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 0,
+    "start": 20,
+    "duration": 30
+   }
+  }
+ },
+ {
+  "id": 21,
+  "category": "disrupt",
+  "question": "On la05, machine four is out of service starting at 150 for 60 units. What is the new makespan?",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la05",
+    "machine": 4,
+    "start": 150,
+    "duration": 60
+   }
+  }
+ },
+ {
+  "id": 22,
+  "category": "disrupt",
+  "question": "Machine 1 on la03 is broken between time 50 and time 90.",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la03",
+    "machine": 1,
+    "start": 50,
+    "duration": 40
+   }
+  }
+ },
+ {
+  "id": 23,
+  "category": "disrupt",
+  "question": "A breakdown hits machine 2 of la02 at time 200, lasting 25 units.",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la02",
+    "machine": 2,
+    "start": 200,
+    "duration": 25
+   }
+  }
+ },
+ {
+  "id": 24,
+  "category": "disrupt",
+  "question": "ft20: if machine 4 is unavailable from 400 to 500, what happens to the plan?",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft20",
+    "machine": 4,
+    "start": 400,
+    "duration": 100
+   }
+  }
+ },
+ {
+  "id": 25,
+  "category": "disrupt",
+  "question": "la01: at time 120 we lose machine 3 for 45 units. What does that do to the plan?",
+  "expected": {
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la01",
+    "machine": 3,
+    "start": 120,
+    "duration": 45
+   }
+  }
+ },
+ {
+  "id": 26,
+  "category": "clarify",
+  "question": "What is the makespan?",
+  "expected": {
+   "tool": null,
+   "arguments": {}
+  }
+ },
+ {
+  "id": 27,
+  "category": "clarify",
+  "question": "Machine 2 broke down on ft06. What now?",
+  "expected": {
+   "tool": null,
+   "arguments": {}
+  }
+ },
+ {
+  "id": 28,
+  "category": "clarify",
+  "question": "Machine 2 is down at time 10 and again at time 40 for 5 units on ft06.",
+  "expected": {
+   "tool": null,
+   "arguments": {}
+  }
+ },
+ {
+  "id": 29,
+  "category": "clarify",
+  "question": "Please schedule instance xyz99.",
+  "expected": {
+   "tool": null,
+   "arguments": {}
+  }
+ },
+ {
+  "id": 30,
+  "category": "clarify",
+  "question": "Machine 2 breaks down on ft06 at time 10 for 2 hours. What happens?",
+  "expected": {
+   "tool": null,
+   "arguments": {}
+  }
+ }
+]
