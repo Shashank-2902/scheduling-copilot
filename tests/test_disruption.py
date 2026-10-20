@@ -74,6 +74,16 @@ def test_a_breakdown_at_time_zero_freezes_nothing():
     assert result["feasible"]
 
 
+@pytest.mark.parametrize("name,machine,start,duration", [("ft10", 3, 300, 100), ("la01", 1, 100, 50)])
+def test_the_same_question_always_gives_the_same_plan(name, machine, start, duration):
+    instance = instance_loader.load_instance(name)
+    base = base_plan(name)
+    first = disruption.disrupt(instance, base, machine, start, duration)
+    second = disruption.disrupt(instance, base, machine, start, duration)
+    assert first["schedule"] == second["schedule"]
+    assert first["operations_moved"] == second["operations_moved"]
+
+
 def test_planner_checks_its_inputs():
     with pytest.raises(ValueError):
         planner.disrupt("ft06", 9, 10, 5)      # machine does not exist

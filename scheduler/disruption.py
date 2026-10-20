@@ -38,8 +38,13 @@ def count_moved(base_schedule, new_schedule, frozen):
     return moved
 
 
-def disrupt(instance, base_schedule, machine, start, duration, time_limit=20.0, workers=8):
-    """Reschedule after the machine is down from `start` for `duration` time units."""
+def disrupt(instance, base_schedule, machine, start, duration, time_limit=20.0, workers=1):
+    """Reschedule after the machine is down from `start` for `duration` time units.
+
+    One worker and a fixed seed, so the same question always gives the same plan. With several
+    workers, different schedules with the same makespan can come out, and the number of moved
+    operations would change from run to run.
+    """
     frozen = find_frozen(base_schedule, start)
     window = breakdown_window(frozen, machine, start, duration)
     frozen_starts = {(op["job"], op["op"]): op["start"] for op in frozen}

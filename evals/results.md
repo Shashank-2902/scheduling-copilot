@@ -7,15 +7,23 @@
 | System | Tool correct | Arguments correct | Numbers faithful | All three |
 | --- | --- | --- | --- | --- |
 | Regex baseline | 77%  (23/30) | 77%  (23/30) | 100%  (30/30) | 77%  (23/30) |
+| Language model | 93%  (28/30) | 93%  (28/30) | 100%  (30/30) | 93%  (28/30) |
 
 ## By category (questions passed)
 
-| Category | Regex baseline |
-| --- | --- |
-| solve | 5/8 |
-| compare | 7/8 |
-| disrupt | 7/9 |
-| clarify | 4/5 |
+| Category | Regex baseline | Language model |
+| --- | --- | --- |
+| solve | 5/8 | 8/8 |
+| compare | 7/8 | 8/8 |
+| disrupt | 7/9 | 9/9 |
+| clarify | 4/5 | 3/5 |
+
+## Tool output equals a direct solver call
+
+For the questions where the right tool and arguments were chosen:
+
+- Regex baseline: 19 of 19
+- Language model: 25 of 25
 
 ## Failures
 
@@ -34,6 +42,7 @@
 - Regex baseline, question 28 (clarify): Machine 2 is down at time 10 and again at time 40 for 5 units on ft06.
   chose tool 'disrupt', expected None
 
-## Language model
-
-Not run yet. It needs a free Groq key in `.env`. Then run `python -m evals.run --system both --write`.
+- Language model, question 28 (clarify): Machine 2 is down at time 10 and again at time 40 for 5 units on ft06.
+  chose tool 'disrupt', expected None
+- Language model, question 30 (clarify): Machine 2 breaks down on ft06 at time 10 for 2 hours. What happens?
+  chose tool 'disrupt', expected None

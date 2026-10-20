@@ -121,6 +121,16 @@ def table_for(results):
     return "\n".join(lines)
 
 
+def truth_lines(results):
+    """When tool and arguments were right, did the tool output equal a direct call of the solver?"""
+    lines = []
+    for name, rows in results.items():
+        checked = [r for r in rows if r.get("matches_ground_truth") is not None]
+        same = sum(1 for r in checked if r["matches_ground_truth"])
+        lines.append(f"- {name}: {same} of {len(checked)}")
+    return "\n".join(lines)
+
+
 def table_by_category(results):
     categories = ["solve", "compare", "disrupt", "clarify"]
     lines = ["| Category | " + " | ".join(results) + " |", "| --- | " + " | ".join("---" for _ in results) + " |"]
@@ -154,6 +164,8 @@ def write_markdown(results):
     parts = ["# Evaluation results", "",
              "30 questions. Ground truth is computed by calling the solver directly, never by a language model.", "",
              "## Summary", "", table_for(results), "", "## By category (questions passed)", "", table_by_category(results), "",
+             "## Tool output equals a direct solver call", "",
+             "For the questions where the right tool and arguments were chosen:", "", truth_lines(results), "",
              "## Failures", ""]
     for name, rows in results.items():
         parts += [failures_for(name, rows), ""]
