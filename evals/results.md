@@ -1,6 +1,6 @@
 # Evaluation results
 
-30 questions. Ground truth is computed by calling the solver directly, never by a language model.
+30 questions. The 30 questions were written by Claude Code. Ground truth is computed by calling the solver directly, never by a language model.
 
 ## Summary
 
@@ -46,3 +46,24 @@ For the questions where the right tool and arguments were chosen:
   chose tool 'disrupt', expected None
 - Language model, question 30 (clarify): Machine 2 breaks down on ft06 at time 10 for 2 hours. What happens?
   chose tool 'disrupt', expected None
+
+## Runs and significance
+
+Model: `openai/gpt-oss-20b`, temperature 0. Number of runs: 3. Each run asked all 30 questions once.
+
+| Run | Date (UTC) | Regex baseline | Language model | Baseline, answerable only | Language model, answerable only |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 2026-10-24T10:26:39+00:00 | 23/30 | 28/30 | 19/25 | 25/25 |
+| 2 | 2026-10-24T10:31:01+00:00 | 23/30 | 28/30 | 19/25 | 25/25 |
+| 3 | 2026-10-24T10:34:34+00:00 | 23/30 | 28/30 | 19/25 | 25/25 |
+
+n = 30 questions per run is small, so a difference of a few questions can be chance.
+
+Two-sided Fisher exact tests, language model against regex baseline (computed with `math.comb`):
+
+- Run 1, all 30 questions: 28/30 against 23/30, p = 0.1455
+- Run 1, answerable questions only: 25/25 against 19/25, p = 0.0223
+- Run 2, all 30 questions: 28/30 against 23/30, p = 0.1455
+- Run 2, answerable questions only: 25/25 against 19/25, p = 0.0223
+- Run 3, all 30 questions: 28/30 against 23/30, p = 0.1455
+- Run 3, answerable questions only: 25/25 against 19/25, p = 0.0223

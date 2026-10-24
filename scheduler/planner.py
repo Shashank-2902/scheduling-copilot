@@ -39,7 +39,7 @@ def get_base_plan(instance_name, time_limit=20.0):
     return _base_plans[key]
 
 
-def disrupt(instance_name, machine, start, duration, base_schedule=None):
+def disrupt(instance_name, machine, start, duration, base_schedule=None, earlier_windows=None):
     """A machine goes down at `start` for `duration`. Reschedule what has not started yet."""
     instance = instance_loader.load_instance(instance_name)
     if not 0 <= machine < instance["num_machines"]:
@@ -48,14 +48,14 @@ def disrupt(instance_name, machine, start, duration, base_schedule=None):
         raise ValueError("start must be 0 or more and duration must be more than 0")
 
     base = base_schedule or get_base_plan(instance_name)
-    result = disruption.disrupt(instance, base, machine, start, duration)
+    result = disruption.disrupt(instance, base, machine, start, duration, earlier_windows=earlier_windows)
     result["instance"] = instance["name"]
     result["machine"] = machine
     result["requested_start"] = start
     result["requested_duration"] = duration
 
     if result["feasible"]:
-        problems = validate(instance, result["schedule"], blocked=result["window"])
+        problems = validate(instance, result["schedule"], blocked=result["windows"])
         if problems:
             raise RuntimeError("the new plan is not valid: " + "; ".join(problems))
     return result

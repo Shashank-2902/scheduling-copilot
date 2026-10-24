@@ -12,7 +12,8 @@ history: some operations are finished and some are running. You cannot move thos
 change what has not started yet. That is **rescheduling**, and it is a different problem:
 
 - the past is fixed;
-- the broken machine has a time window in which it cannot work;
+- the broken machine has a time window in which it cannot work, and the windows of earlier approved
+  breakdowns stay in force;
 - the goal is still a small makespan, but also a plan people can follow, so changing less is better.
 
 ### Why frozen operations matter
@@ -54,7 +55,8 @@ later the work finishes, and how many operations had to move.
 
 A new plan is only a **proposal** until a person agrees. The system keeps two tables in Postgres:
 
-- `committed_plans`: plans a human approved, with who approved them;
+- `committed_plans`: plans a human approved, with the reviewer name sent with the request (the API does not
+  authenticate it) and the list of all breakdown windows that apply to the plan (`disruptions`);
 - `audit_log`: every step (question, approval requested, approved or rejected, committed).
 
 The only code that writes to `committed_plans` is the final step of the approval flow (week 3).
@@ -66,9 +68,11 @@ The only code that writes to `committed_plans` is the final step of the approval
 - `find_frozen` selects the operations of the old plan that started before the breakdown time.
 - `breakdown_window` returns the real window, which starts later if a frozen operation is still running
   on the broken machine.
-- `disrupt` calls the solver with the frozen start times fixed, the machine window blocked and
-  "not before breakdown time" for everything else. The old plan is given to the solver as a hint, so it
-  starts from a good guess.
+- `disrupt` calls the solver with the frozen start times fixed, the machine windows blocked and
+  "not before breakdown time" for everything else. The windows are the new one plus the windows of earlier
+  approved breakdowns, which are stored with the last committed plan. The solver merges windows of one
+  machine that overlap or touch, because two fixed intervals that overlap on one machine make the model
+  infeasible. The old plan is given to the solver as a hint, so it starts from a good guess.
 - `count_moved` compares old and new start times of the non-frozen operations.
 
 **`scheduler/planner.py`** wraps this with input checks and runs `validate` on the result. If the new plan is
@@ -133,7 +137,8 @@ I also tested the tests: when I temporarily switched the freeze rule off, seven 
 - **Rescheduling**: changing a running plan after a disruption.
 - **Disruption**: an event that breaks the plan, here a machine breakdown.
 - **Frozen operation**: an operation that already started and must not move.
-- **Breakdown window**: the time interval in which a machine cannot work.
+- **Breakdown window**: the time interval in which a machine cannot work. The windows of approved breakdowns
+  are stored with the committed plan, so a later breakdown cannot place work inside them.
 - **Hint**: a starting guess given to the solver.
 - **Operations moved**: how many unfrozen operations changed their start time.
 - **Proposal**: a new plan that nobody has approved yet.

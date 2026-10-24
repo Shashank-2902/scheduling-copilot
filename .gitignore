@@ -3,4 +3,3 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-evals/results_raw.json

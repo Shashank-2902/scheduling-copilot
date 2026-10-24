@@ -82,6 +82,7 @@ def build_graph(llm, store, checkpointer):
             schedule=state["result"]["schedule"],
             question=state["question"],
             reviewer=state["reviewer"],
+            disruptions=state["result"]["windows"],
         )
         store.add_audit("committed", thread_id, {"plan_id": plan_id, "makespan": state["result"]["new_makespan"]})
         return {"status": "committed", "plan_id": plan_id}

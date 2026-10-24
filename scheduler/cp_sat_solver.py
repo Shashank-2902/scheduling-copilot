@@ -7,6 +7,8 @@ The objective is to make the last end time (the makespan) as small as possible.
 """
 from ortools.sat.python import cp_model
 
+from scheduler.schedule import merge_windows
+
 STATUS_NAMES = {
     cp_model.OPTIMAL: "OPTIMAL",
     cp_model.FEASIBLE: "FEASIBLE",
@@ -21,15 +23,17 @@ def solve_instance(instance, time_limit=20.0, workers=8, seed=0,
     """Solve the instance.
 
     frozen         dict {(job, op): start} of operations that must keep their start time
-    blocked        dict {"machine": m, "start": s, "end": e}: the machine cannot work in that window
+    blocked        one dict {"machine": m, "start": s, "end": e} or a list of them: the machine cannot
+                   work in those windows. Overlapping or touching windows of a machine are merged.
     earliest_start operations that are not frozen may not start before this time
     hint           a schedule used as a starting guess for the solver
     """
     frozen = frozen or {}
+    windows = merge_windows(blocked)
     model = cp_model.CpModel()
 
     all_durations = [d for job in instance["jobs"] for (_, d) in job]
-    horizon = sum(all_durations) + earliest_start + (blocked["end"] if blocked else 0)
+    horizon = sum(all_durations) + earliest_start + max((w["end"] for w in windows), default=0)
 
     starts = {}
     ends = {}
@@ -48,9 +52,9 @@ def solve_instance(instance, time_limit=20.0, workers=8, seed=0,
             starts[key], ends[key] = start, end
             intervals_on_machine[machine].append(interval)
 
-    if blocked:
-        window = model.new_fixed_size_interval_var(blocked["start"], blocked["end"] - blocked["start"], "breakdown")
-        intervals_on_machine[blocked["machine"]].append(window)
+    for number, window in enumerate(windows):
+        interval = model.new_fixed_size_interval_var(window["start"], window["end"] - window["start"], f"breakdown_{number}")
+        intervals_on_machine[window["machine"]].append(interval)
 
     for machine, intervals in intervals_on_machine.items():
         model.add_no_overlap(intervals)

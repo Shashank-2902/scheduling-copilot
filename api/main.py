@@ -115,8 +115,10 @@ def create_app(store=None, llm=None, checkpointer=None):
     @app.post("/disrupt")
     def disrupt(request: schemas.DisruptRequest):
         args = clean("disrupt", **request.model_dump())
+        latest = app.state.store.latest_plan(args["instance"])
         return planner.disrupt(args["instance"], args["machine"], args["start"], args["duration"],
-                               base_schedule=app.state.store.latest_schedule(args["instance"]))
+                               base_schedule=latest["schedule"] if latest else None,
+                               earlier_windows=latest["disruptions"] if latest else None)
 
     @app.post("/compare")
     def compare(request: schemas.CompareRequest):

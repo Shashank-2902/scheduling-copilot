@@ -1,0 +1,1333 @@
+{
+ "Regex baseline": [
+  {
+   "id": 1,
+   "category": "solve",
+   "question": "What is the best makespan you can find for ft06?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "ft06"
+   },
+   "seconds": 0.02,
+   "tool": "solve",
+   "arguments": {
+    "instance": "ft06"
+   },
+   "answer": "The best makespan for ft06 is 55 (best known 55, gap 0.0 percent).",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 2,
+   "category": "solve",
+   "question": "Solve la03.",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la03"
+   },
+   "seconds": 0.09,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la03"
+   },
+   "answer": "The best makespan for la03 is 597 (best known 597, gap 0.0 percent).",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 3,
+   "category": "solve",
+   "question": "Can you work out how fast we could finish all the jobs on the 10 by 10 Fisher-Thompson instance ft10?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "ft10"
+   },
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "I can solve an instance, compare rules with the solver, or handle a machine breakdown.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 4,
+   "category": "solve",
+   "question": "How long does the shortest possible schedule for la07 take?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la07"
+   },
+   "seconds": 0.09,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la07"
+   },
+   "answer": "The best makespan for la07 is 890 (best known 890, gap 0.0 percent).",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 5,
+   "category": "solve",
+   "question": "I want the plan for ft 20 with the lowest possible finish time.",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "ft20"
+   },
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "Which instance do you mean? For example ft06 or la01.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 6,
+   "category": "solve",
+   "question": "What makespan can the solver reach on la10, and what is the gap to the best known?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la10"
+   },
+   "seconds": 0.06,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la10"
+   },
+   "answer": "The best makespan for la10 is 958 (best known 958, gap 0.0 percent).",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 7,
+   "category": "solve",
+   "question": "Please optimise la01.",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la01"
+   },
+   "seconds": 0.07,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la01"
+   },
+   "answer": "The best makespan for la01 is 666 (best known 666, gap 0.0 percent).",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 8,
+   "category": "solve",
+   "question": "Any chance you can do better than 700 on la05?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la05"
+   },
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "I can solve an instance, compare rules with the solver, or handle a machine breakdown.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 9,
+   "category": "compare",
+   "question": "Compare FIFO, SPT and the solver on ft10.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "ft10"
+   },
+   "seconds": 14.16,
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft10"
+   },
+   "answer": "Makespan on ft10: FIFO 1184, SPT 1429, CP-SAT 930. Best known is 930.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 10,
+   "category": "compare",
+   "question": "Is the FIFO rule any good on la02? Compare it with the optimum.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la02"
+   },
+   "seconds": 0.29,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la02"
+   },
+   "answer": "Makespan on la02: FIFO 830, SPT 1055, CP-SAT 655. Best known is 655.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 11,
+   "category": "compare",
+   "question": "How much worse are dispatch rules than CP-SAT on ft06?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "ft06"
+   },
+   "seconds": 0.05,
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft06"
+   },
+   "answer": "Makespan on ft06: FIFO 65, SPT 94, CP-SAT 55. Best known is 55.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 12,
+   "category": "compare",
+   "question": "Run a comparison for la08.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la08"
+   },
+   "seconds": 0.1,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la08"
+   },
+   "answer": "Makespan on la08: FIFO 980, SPT 1318, CP-SAT 863. Best known is 863.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 13,
+   "category": "compare",
+   "question": "On la04, would first-in-first-out or shortest-processing-time give the shorter schedule?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la04"
+   },
+   "seconds": 0.21,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la04"
+   },
+   "answer": "The best makespan for la04 is 590 (best known 590, gap 0.0 percent).",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 14,
+   "category": "compare",
+   "question": "Show me a table of rule-based schedules versus the solver for ft20.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "ft20"
+   },
+   "seconds": 1.85,
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft20"
+   },
+   "answer": "Makespan on ft20: FIFO 1645, SPT 1675, CP-SAT 1165. Best known is 1165.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 15,
+   "category": "compare",
+   "question": "How do simple rules do on la06?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la06"
+   },
+   "seconds": 0.03,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la06"
+   },
+   "answer": "Makespan on la06: FIFO 926, SPT 1439, CP-SAT 926. Best known is 926.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 16,
+   "category": "compare",
+   "question": "Is it worth using the solver instead of a basic heuristic on la09?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la09"
+   },
+   "seconds": 0.07,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la09"
+   },
+   "answer": "Makespan on la09: FIFO 1018, SPT 1287, CP-SAT 951. Best known is 951.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 17,
+   "category": "disrupt",
+   "question": "Machine 2 breaks down at time 10 for 15 time units on ft06. What happens to the makespan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 15
+   },
+   "seconds": 0.03,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 15
+   },
+   "answer": "The makespan changes from 55 to 61. 16 operations moved and 8 were frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 18,
+   "category": "disrupt",
+   "question": "On la01, machine 1 is down from time 100 for 50 units. Reschedule.",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la01",
+    "machine": 1,
+    "start": 100,
+    "duration": 50
+   },
+   "seconds": 0.02,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la01",
+    "machine": 1,
+    "start": 100,
+    "duration": 50
+   },
+   "answer": "The makespan changes from 666 to 666. 0 operations moved and 12 were frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 19,
+   "category": "disrupt",
+   "question": "ft10: machine 3 fails at 300 and is repaired after 100 time units. How many operations move?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft10",
+    "machine": 3,
+    "start": 300,
+    "duration": 100
+   },
+   "seconds": 0.19,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft10",
+    "machine": 3,
+    "start": 300,
+    "duration": 100
+   },
+   "answer": "The makespan changes from 942 to 972. 63 operations moved and 29 were frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 20,
+   "category": "disrupt",
+   "question": "What if machine 0 stops at time 20 for 30 units on ft06?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft06",
+    "machine": 0,
+    "start": 20,
+    "duration": 30
+   },
+   "seconds": 0.02,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 0,
+    "start": 20,
+    "duration": 30
+   },
+   "answer": "The makespan changes from 55 to 82. 7 operations moved and 16 were frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 21,
+   "category": "disrupt",
+   "question": "On la05, machine four is out of service starting at 150 for 60 units. What is the new makespan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la05",
+    "machine": 4,
+    "start": 150,
+    "duration": 60
+   },
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "Please tell me the machine of the breakdown.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 22,
+   "category": "disrupt",
+   "question": "Machine 1 on la03 is broken between time 50 and time 90.",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la03",
+    "machine": 1,
+    "start": 50,
+    "duration": 40
+   },
+   "seconds": 0.01,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la03",
+    "machine": 1,
+    "start": 50,
+    "duration": 40
+   },
+   "answer": "The makespan changes from 597 to 628. 41 operations moved and 8 were frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 23,
+   "category": "disrupt",
+   "question": "A breakdown hits machine 2 of la02 at time 200, lasting 25 units.",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la02",
+    "machine": 2,
+    "start": 200,
+    "duration": 25
+   },
+   "seconds": 0.01,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la02",
+    "machine": 2,
+    "start": 200,
+    "duration": 25
+   },
+   "answer": "The makespan changes from 655 to 655. 0 operations moved and 22 were frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 24,
+   "category": "disrupt",
+   "question": "ft20: if machine 4 is unavailable from 400 to 500, what happens to the plan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft20",
+    "machine": 4,
+    "start": 400,
+    "duration": 100
+   },
+   "seconds": 0.18,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft20",
+    "machine": 4,
+    "start": 400,
+    "duration": 100
+   },
+   "answer": "The makespan changes from 1165 to 1252. 61 operations moved and 39 were frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 25,
+   "category": "disrupt",
+   "question": "la01: at time 120 we lose machine 3 for 45 units. What does that do to the plan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la01",
+    "machine": 3,
+    "start": 120,
+    "duration": 45
+   },
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "I can solve an instance, compare rules with the solver, or handle a machine breakdown.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 26,
+   "category": "clarify",
+   "question": "What is the makespan?",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "Which instance do you mean? For example ft06 or la01.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": true
+  },
+  {
+   "id": 27,
+   "category": "clarify",
+   "question": "Machine 2 broke down on ft06. What now?",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "Please tell me the start time and the duration of the breakdown.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": true
+  },
+  {
+   "id": 28,
+   "category": "clarify",
+   "question": "Machine 2 is down at time 10 and again at time 40 for 5 units on ft06.",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 0.03,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 5
+   },
+   "answer": "The makespan changes from 55 to 57. 13 operations moved and 8 were frozen.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 29,
+   "category": "clarify",
+   "question": "Please schedule instance xyz99.",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "Which instance do you mean? For example ft06 or la01.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": true
+  },
+  {
+   "id": 30,
+   "category": "clarify",
+   "question": "Machine 2 breaks down on ft06 at time 10 for 2 hours. What happens?",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 0.0,
+   "tool": null,
+   "arguments": {},
+   "answer": "I can only use the time units of the instance. Please give the times in those units.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": true
+  }
+ ],
+ "Language model": [
+  {
+   "id": 1,
+   "category": "solve",
+   "question": "What is the best makespan you can find for ft06?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "ft06"
+   },
+   "seconds": 1.5,
+   "tool": "solve",
+   "arguments": {
+    "instance": "ft06"
+   },
+   "answer": "The solver found an optimal makespan of 55 for ft06.  \nThis matches the best known value of 55, giving a gap of 0.0 percent.  \nThe solve time was 0.03 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 2,
+   "category": "solve",
+   "question": "Solve la03.",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la03"
+   },
+   "seconds": 0.92,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la03"
+   },
+   "answer": "The solver found an optimal schedule for instance la03.  \nThe makespan achieved is 597, matching the best known value of 597.  \nThe solver finished in 0.16 seconds with a gap of 0.0 percent to the best known solution.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 3,
+   "category": "solve",
+   "question": "Can you work out how fast we could finish all the jobs on the 10 by 10 Fisher-Thompson instance ft10?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "ft10"
+   },
+   "seconds": 6.8,
+   "tool": "solve",
+   "arguments": {
+    "instance": "ft10"
+   },
+   "answer": "The solver found an optimal schedule for the ft10 instance with a makespan of 930. This matches the best known value of 930, so the gap is 0.0 percent. The solve time was 5.4 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 4,
+   "category": "solve",
+   "question": "How long does the shortest possible schedule for la07 take?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la07"
+   },
+   "seconds": 1.42,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la07"
+   },
+   "answer": "The optimal schedule for la07 has a makespan of 890. The solver found this result in 0.07 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 5,
+   "category": "solve",
+   "question": "I want the plan for ft 20 with the lowest possible finish time.",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "ft20"
+   },
+   "seconds": 2.28,
+   "tool": "solve",
+   "arguments": {
+    "instance": "ft20"
+   },
+   "answer": "The solver found an optimal plan for ft20 with a makespan of 1165. This matches the best known value of 1165, so the gap is 0.0 percent. The computation finished in 1.04 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 6,
+   "category": "solve",
+   "question": "What makespan can the solver reach on la10, and what is the gap to the best known?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la10"
+   },
+   "seconds": 2.1,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la10"
+   },
+   "answer": "The solver found an optimal makespan of 958 for la10.  \nThis matches the best known value, giving a gap of 0.0\u202fpercent.  \nThe solve time was 0.05\u202fseconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 7,
+   "category": "solve",
+   "question": "Please optimise la01.",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la01"
+   },
+   "seconds": 0.99,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la01"
+   },
+   "answer": "The solver found an optimal schedule for la01 with a makespan of 666.  \nThis matches the best known value of 666, giving a gap of 0.0 percent.  \nThe solution was obtained in 0.05 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 8,
+   "category": "solve",
+   "question": "Any chance you can do better than 700 on la05?",
+   "expected_tool": "solve",
+   "expected_arguments": {
+    "instance": "la05"
+   },
+   "seconds": 1.06,
+   "tool": "solve",
+   "arguments": {
+    "instance": "la05"
+   },
+   "answer": "The solver found an optimal schedule with a makespan of 593, which is better than 700. The gap to the best known value is 0.0 percent. The solve time was 0.03 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 9,
+   "category": "compare",
+   "question": "Compare FIFO, SPT and the solver on ft10.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "ft10"
+   },
+   "seconds": 11.67,
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft10"
+   },
+   "answer": "On ft10, FIFO achieves a makespan of 1184, which is 27.31\u202f% above the best known 930.  \nSPT yields a makespan of 1429, 53.66\u202f% above the best known.  \nThe CP\u2011SAT solver reaches the best known makespan of 930 in 10.05\u202fseconds, with a gap of 0.0\u202f%.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 10,
+   "category": "compare",
+   "question": "Is the FIFO rule any good on la02? Compare it with the optimum.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la02"
+   },
+   "seconds": 0.58,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la02"
+   },
+   "answer": "FIFO achieves a makespan of 830 on la02, which is 26.72\u202f% higher than the best known optimum of 655. The CP\u2011SAT method reaches the optimum makespan of 655, showing that FIFO is not optimal. Therefore, FIFO is not a good rule for this instance compared to the optimum.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 11,
+   "category": "compare",
+   "question": "How much worse are dispatch rules than CP-SAT on ft06?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "ft06"
+   },
+   "seconds": 0.47,
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft06"
+   },
+   "answer": "FIFO is 18.18\u202f% worse than CP\u2011SAT on ft06.  \nSPT is 70.91\u202f% worse than CP\u2011SAT on ft06.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 12,
+   "category": "compare",
+   "question": "Run a comparison for la08.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la08"
+   },
+   "seconds": 1.0,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la08"
+   },
+   "answer": "The best known makespan for la08 is 863. FIFO achieved a makespan of 980, which is 13.56\u202f% above the best known. SPT reached 1318, 52.72\u202f% above the best known. CP\u2011SAT matched the best known with 863 and took 0.08\u202fseconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 13,
+   "category": "compare",
+   "question": "On la04, would first-in-first-out or shortest-processing-time give the shorter schedule?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la04"
+   },
+   "seconds": 0.9,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la04"
+   },
+   "answer": "FIFO gives a makespan of 695, while SPT gives 842. Therefore FIFO is the shorter schedule.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 14,
+   "category": "compare",
+   "question": "Show me a table of rule-based schedules versus the solver for ft20.",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "ft20"
+   },
+   "seconds": 4.23,
+   "tool": "compare",
+   "arguments": {
+    "instance": "ft20"
+   },
+   "answer": "For instance ft20, the best known makespan is 1165. The FIFO rule produces a makespan of 1645, which is 41.2% above the best known, and it takes 0.02 seconds. The SPT rule gives a makespan of 1675, a 43.78% gap, and 0.0 seconds. The CP\u2011SAT solver achieves the best known makespan of 1165 with a 0.0% gap in 2.92 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 15,
+   "category": "compare",
+   "question": "How do simple rules do on la06?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la06"
+   },
+   "seconds": 1.65,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la06"
+   },
+   "answer": "For instance la06, the best known makespan is 926. The FIFO rule achieves a makespan of 926 with a gap of 0.0 percent, taking 0.01 seconds. The SPT rule gives a makespan of 1439, a gap of 55.4 percent, and takes 0.0 seconds. The CP\u2011SAT method also reaches 926 with a gap of 0.0 percent in 0.06 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 16,
+   "category": "compare",
+   "question": "Is it worth using the solver instead of a basic heuristic on la09?",
+   "expected_tool": "compare",
+   "expected_arguments": {
+    "instance": "la09"
+   },
+   "seconds": 0.88,
+   "tool": "compare",
+   "arguments": {
+    "instance": "la09"
+   },
+   "answer": "The solver finds a makespan of 951, which matches the best known value. FIFO produces a makespan of 1018, a 7.05\u202f% gap to the best known. SPT gives a makespan of 1287, a 35.33\u202f% gap. The solver takes 0.12\u202fs, while the heuristics take 0.0\u202fs.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 17,
+   "category": "disrupt",
+   "question": "Machine 2 breaks down at time 10 for 15 time units on ft06. What happens to the makespan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 15
+   },
+   "seconds": 1.12,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 15
+   },
+   "answer": "The makespan rises from 55 to 61.  \nThe delay introduced is 6 time units.  \nMachine\u202f2 is frozen from 13 to 28, with 16 operations moved.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 18,
+   "category": "disrupt",
+   "question": "On la01, machine 1 is down from time 100 for 50 units. Reschedule.",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la01",
+    "machine": 1,
+    "start": 100,
+    "duration": 50
+   },
+   "seconds": 1.23,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la01",
+    "machine": 1,
+    "start": 100,
+    "duration": 50
+   },
+   "answer": "The reschedule is feasible and optimal, with the old and new makespan both 666. No delay was introduced, and twelve operations were frozen while none were moved. The window for machine 1 is from 124 to 174. The solve time was 0.01 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 19,
+   "category": "disrupt",
+   "question": "ft10: machine 3 fails at 300 and is repaired after 100 time units. How many operations move?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft10",
+    "machine": 3,
+    "start": 300,
+    "duration": 100
+   },
+   "seconds": 4.17,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft10",
+    "machine": 3,
+    "start": 300,
+    "duration": 100
+   },
+   "answer": "The new makespan is 972, up from 942, with a delay of 30.  \n63 operations were moved and 29 were frozen.  \nThe window for machine 3 is from 327 to 427.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 20,
+   "category": "disrupt",
+   "question": "What if machine 0 stops at time 20 for 30 units on ft06?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft06",
+    "machine": 0,
+    "start": 20,
+    "duration": 30
+   },
+   "seconds": 7.64,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 0,
+    "start": 20,
+    "duration": 30
+   },
+   "answer": "The disruption is feasible and the solver found an optimal schedule.  \nMachine 0 stops at 20 for 30 units, and the new makespan is 82, up from the old 55, with a delay of 27.  \nThe machine 0 will be frozen from 27 to 57, and 7 operations were moved while 16 remained frozen.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 21,
+   "category": "disrupt",
+   "question": "On la05, machine four is out of service starting at 150 for 60 units. What is the new makespan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la05",
+    "machine": 4,
+    "start": 150,
+    "duration": 60
+   },
+   "seconds": 6.22,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la05",
+    "machine": 4,
+    "start": 150,
+    "duration": 60
+   },
+   "answer": "The machine 4 is out of service from 150 to 210 for 60 units.  \nThe disruption does not affect the makespan, which stays at 593.  \nThe solver confirmed the schedule is feasible and optimal, freezing 17 operations and moving 27.  \nThe solve time was 0.01 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 22,
+   "category": "disrupt",
+   "question": "Machine 1 on la03 is broken between time 50 and time 90.",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la03",
+    "machine": 1,
+    "start": 50,
+    "duration": 40
+   },
+   "seconds": 8.11,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la03",
+    "machine": 1,
+    "start": 50,
+    "duration": 40
+   },
+   "answer": "The disruption plan is feasible and optimal. The new makespan is 628 compared to the old 597, with a delay of 31. Eight operations were frozen and 41 were moved. The window for machine 1 is from 52 to 92, and the solve time was 0.02 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 23,
+   "category": "disrupt",
+   "question": "A breakdown hits machine 2 of la02 at time 200, lasting 25 units.",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la02",
+    "machine": 2,
+    "start": 200,
+    "duration": 25
+   },
+   "seconds": 11.05,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la02",
+    "machine": 2,
+    "start": 200,
+    "duration": 25
+   },
+   "answer": "The disruption on machine 2 at time 200 lasting 25 units was handled without affecting the overall schedule.  \nThe makespan remains 655, with no delay.  \n22 operations were frozen, none moved, and the window for the repair is from 205 to 230.  \nThe solver finished in 0.01 seconds.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 24,
+   "category": "disrupt",
+   "question": "ft20: if machine 4 is unavailable from 400 to 500, what happens to the plan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "ft20",
+    "machine": 4,
+    "start": 400,
+    "duration": 100
+   },
+   "seconds": 6.53,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft20",
+    "machine": 4,
+    "start": 400,
+    "duration": 100
+   },
+   "answer": "The plan remains feasible and optimal.  \nThe new makespan is 1252, up from 1165, with a delay of 87.  \n39 operations are frozen and 61 are moved, and the disruption window for machine 4 is 413 to 513, even though the requested unavailability was 400 to 500.  \nThe solve time was 0.18 seconds and the requested start was 400 for a duration of 100.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 25,
+   "category": "disrupt",
+   "question": "la01: at time 120 we lose machine 3 for 45 units. What does that do to the plan?",
+   "expected_tool": "disrupt",
+   "expected_arguments": {
+    "instance": "la01",
+    "machine": 3,
+    "start": 120,
+    "duration": 45
+   },
+   "seconds": 6.85,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "la01",
+    "machine": 3,
+    "start": 120,
+    "duration": 45
+   },
+   "answer": "The disruption at time 120 for 45 units on machine 3 does not change the makespan, which remains 666. The solver found an optimal schedule with no delay. Fourteen operations were frozen and twenty\u2011four were moved within the window from 186 to 231. The plan is still feasible and optimal.",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": true,
+   "passed": true
+  },
+  {
+   "id": 26,
+   "category": "clarify",
+   "question": "What is the makespan?",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 4.09,
+   "tool": null,
+   "arguments": {},
+   "answer": "Which job\u2011shop instance would you like the makespan for?",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": true
+  },
+  {
+   "id": 27,
+   "category": "clarify",
+   "question": "Machine 2 broke down on ft06. What now?",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 7.94,
+   "tool": null,
+   "arguments": {},
+   "answer": "Could you let me know when the breakdown started and how long machine\u202f2 will be down?",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": true
+  },
+  {
+   "id": 28,
+   "category": "clarify",
+   "question": "Machine 2 is down at time 10 and again at time 40 for 5 units on ft06.",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 2.37,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 5
+   },
+   "answer": "The solver found an optimal schedule with a new makespan of 57, up from the old 55. It moved 13 operations and froze 8, keeping machine 2 busy from 13 to 18. The delay introduced is 2 units, matching the requested start of 10 and duration of 5. The solve time was 0.02 seconds.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  },
+  {
+   "id": 29,
+   "category": "clarify",
+   "question": "Please schedule instance xyz99.",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 8.16,
+   "tool": null,
+   "arguments": {},
+   "answer": "Which instance would you like to schedule?",
+   "tool_ok": true,
+   "args_ok": true,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": true
+  },
+  {
+   "id": 30,
+   "category": "clarify",
+   "question": "Machine 2 breaks down on ft06 at time 10 for 2 hours. What happens?",
+   "expected_tool": null,
+   "expected_arguments": {},
+   "seconds": 1.01,
+   "tool": "disrupt",
+   "arguments": {
+    "instance": "ft06",
+    "machine": 2,
+    "start": 10,
+    "duration": 2
+   },
+   "answer": "Machine 2 breaks down at time 10 for 2 hours, causing the schedule to shift. The new makespan increases from 55 to 57, with a delay of 2. Eight operations are frozen and thirteen are moved within the window from 13 to 15. The solver finished in 0.02 seconds and found an optimal solution.",
+   "tool_ok": false,
+   "args_ok": false,
+   "numbers_ok": true,
+   "wrong_numbers": [],
+   "matches_ground_truth": null,
+   "passed": false
+  }
+ ]
+}

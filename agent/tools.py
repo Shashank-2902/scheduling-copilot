@@ -93,16 +93,16 @@ def check_arguments(tool, arguments):
     return clean
 
 
-def run_tool(tool, arguments, base_schedule=None):
+def run_tool(tool, arguments, base_schedule=None, earlier_windows=None):
     """Run a tool with checked arguments and return the full result."""
     if tool == "solve":
         return planner.solve(arguments["instance"])
     if tool == "compare":
         return planner.compare(arguments["instance"])
     return planner.disrupt(arguments["instance"], arguments["machine"], arguments["start"],
-                           arguments["duration"], base_schedule=base_schedule)
+                           arguments["duration"], base_schedule=base_schedule, earlier_windows=earlier_windows)
 
 
 def summarize(result):
-    """The result without the schedule. This is what the model sees and may talk about."""
-    return {key: value for key, value in result.items() if key != "schedule"}
+    """The result without the schedule and the stored windows. This is what the model sees and may talk about."""
+    return {key: value for key, value in result.items() if key not in ("schedule", "windows")}

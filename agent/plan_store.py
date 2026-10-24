@@ -18,24 +18,32 @@ class PlanStore:
                 (event, thread_id, Jsonb(details)),
             )
 
-    def commit_plan(self, thread_id, instance, makespan, schedule, question, reviewer):
-        """Save an approved plan and return its id. Only the approval step calls this."""
+    def commit_plan(self, thread_id, instance, makespan, schedule, question, reviewer, disruptions=None):
+        """Save an approved plan and return its id. Only the approval step calls this.
+
+        disruptions are all breakdown windows that apply to this plan (earlier ones and the new one).
+        """
         with self._connect() as conn:
             row = conn.execute(
-                "INSERT INTO committed_plans (instance, makespan, schedule, question, reviewer, thread_id) "
-                "VALUES (%s, %s, %s, %s, %s, %s) RETURNING id",
-                (instance, makespan, Jsonb(schedule), question, reviewer, thread_id),
+                "INSERT INTO committed_plans (instance, makespan, schedule, question, reviewer, thread_id, disruptions) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id",
+                (instance, makespan, Jsonb(schedule), question, reviewer, thread_id, Jsonb(disruptions or [])),
             ).fetchone()
         return row["id"]
 
-    def latest_schedule(self, instance):
-        """The newest committed plan of an instance, or None."""
+    def latest_plan(self, instance):
+        """The newest committed plan of an instance as {"schedule", "disruptions"}, or None."""
         with self._connect() as conn:
             row = conn.execute(
-                "SELECT schedule FROM committed_plans WHERE instance = %s ORDER BY id DESC LIMIT 1",
+                "SELECT schedule, disruptions FROM committed_plans WHERE instance = %s ORDER BY id DESC LIMIT 1",
                 (instance,),
             ).fetchone()
-        return row["schedule"] if row else None
+        return row
+
+    def latest_schedule(self, instance):
+        """The schedule of the newest committed plan of an instance, or None."""
+        latest = self.latest_plan(instance)
+        return latest["schedule"] if latest else None
 
     def list_plans(self, limit=20):
         with self._connect() as conn:

@@ -13,6 +13,10 @@ CREATE TABLE IF NOT EXISTS committed_plans (
     committed_at timestamptz NOT NULL DEFAULT now()
 );
 
+-- All breakdown windows that apply to a plan: those of earlier approved breakdowns plus the new one,
+-- as a list of {"machine", "start", "end"}. Plans saved before this column existed have an empty list.
+ALTER TABLE committed_plans ADD COLUMN IF NOT EXISTS disruptions jsonb NOT NULL DEFAULT '[]';
+
 -- Everything that happens around a proposal: asked, approved, rejected, committed.
 CREATE TABLE IF NOT EXISTS audit_log (
     id          bigserial   PRIMARY KEY,

@@ -16,12 +16,14 @@ def run_step(tool, arguments, store=None):
     """Check the arguments and run the tool. Raises ToolInputError if the arguments are not usable."""
     clean = tools.check_arguments(tool, arguments)
 
-    base_schedule = None
+    base_schedule, earlier_windows = None, None
     if tool == "disrupt" and store is not None:
-        base_schedule = store.latest_schedule(clean["instance"])
+        latest = store.latest_plan(clean["instance"])
+        if latest:
+            base_schedule, earlier_windows = latest["schedule"], latest["disruptions"]
 
     try:
-        result = tools.run_tool(tool, clean, base_schedule=base_schedule)
+        result = tools.run_tool(tool, clean, base_schedule=base_schedule, earlier_windows=earlier_windows)
     except ValueError as error:
         raise ToolInputError(str(error))
     return clean, result, tools.summarize(result)

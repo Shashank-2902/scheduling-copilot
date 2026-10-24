@@ -13,20 +13,26 @@ class MemoryStore:
             "event": event, "thread_id": thread_id, "details": details,
         })
 
-    def commit_plan(self, thread_id, instance, makespan, schedule, question, reviewer):
+    def commit_plan(self, thread_id, instance, makespan, schedule, question, reviewer, disruptions=None):
         plan = {
             "id": len(self.plans) + 1, "instance": instance, "makespan": makespan, "schedule": schedule,
+            "disruptions": disruptions or [],
             "question": question, "reviewer": reviewer, "thread_id": thread_id,
             "committed_at": datetime.now(timezone.utc),
         }
         self.plans.append(plan)
         return plan["id"]
 
-    def latest_schedule(self, instance):
+    def latest_plan(self, instance):
+        """The newest plan of an instance as {"schedule", "disruptions"}, or None."""
         for plan in reversed(self.plans):
             if plan["instance"] == instance:
-                return plan["schedule"]
+                return {"schedule": plan["schedule"], "disruptions": plan["disruptions"]}
         return None
+
+    def latest_schedule(self, instance):
+        latest = self.latest_plan(instance)
+        return latest["schedule"] if latest else None
 
     def list_plans(self, limit=20):
         return list(reversed(self.plans))[:limit]

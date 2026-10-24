@@ -62,7 +62,8 @@ curl -X POST localhost:8000/ask -H "Content-Type: application/json" \
 # 2. Look at the proposed plan.
 #    http://localhost:8000/proposals/<thread_id>/gantt.png
 
-# 3. A person decides. Only "approve" writes the plan (and logs who approved it).
+# 3. A person decides. Only "approve" writes the plan. The audit log keeps the reviewer name sent
+#    with the request (not authenticated).
 curl -X POST localhost:8000/approvals/<thread_id> -H "Content-Type: application/json" \
   -d '{"decision": "approve", "reviewer": "your name"}'
 
@@ -107,15 +108,24 @@ Measured with `POST /compare`:
 
 `ft06`, machine 2 breaks down at time 10 for 15 units. A frozen operation was still running on that
 machine until time 13, so the real breakdown window is 13 to 28. The makespan goes from 55 to 61, 8
-operations stay frozen and 16 move.
+operations stay frozen and 16 move. The other 12 of the 36 operations were not frozen but kept their
+start time.
+
+An approved breakdown stays in force. Each committed plan stores all breakdown windows that apply to it
+(the column `disruptions` in `committed_plans`: the windows of the previous plan plus the new one). A
+later disruption on the same instance starts from the latest committed plan and cannot place work on
+a machine during an earlier outage. For example, after the ft06 breakdown above, a second breakdown of
+machine 3 at time 5 for 10 units gives a plan where machine 2 stays idle from 13 to 28. Without the stored
+window, that plan used machine 2 during the earlier outage with 2 operations.
 
 ![ft06 after a breakdown](docs/images/ft06_breakdown_proposal.png)
 
 ### Evaluation of question answering
 
-30 questions in four groups: solve (8), compare (8), disrupt (9), unclear or incomplete (5). The answer
-key is computed by calling the solver directly, never by a language model. Model: Groq
-`openai/gpt-oss-20b` with temperature 0. Details and failures: [evals/results.md](evals/results.md).
+30 questions in four groups: solve (8), compare (8), disrupt (9), unclear or incomplete (5). The 30 questions
+were written by Claude Code. The answer key is computed by calling the solver directly, never by a language
+model. Model: Groq `openai/gpt-oss-20b` with temperature 0. Details and failures: [evals/results.md](evals/results.md).
+The raw data of each run is in [evals/runs/](evals/runs/).
 
 | System | Tool correct | Arguments correct | Numbers faithful | All three |
 | --- | --- | --- | --- | --- |
@@ -131,9 +141,22 @@ By group (questions passed):
 | disrupt | 7/9 | 9/9 |
 | unclear or incomplete | 4/5 | 3/5 |
 
-I ran the model evaluation three times and got the same score each time. Average time per question was about
-6 seconds, most of it the solver. In every case where the tool and arguments were right, the tool output was
-identical to a direct call of the solver.
+I ran the evaluation three times on 24 Oct 2026 (UTC) with the model `openai/gpt-oss-20b` at temperature 0:
+
+| Run | Regex baseline | Language model |
+| --- | --- | --- |
+| 1 | 23/30 | 28/30 |
+| 2 | 23/30 | 28/30 |
+| 3 | 23/30 | 28/30 |
+
+The three runs gave the same score and the same tool and arguments for every question. Average time per question
+was between 3.8 and 5.2 seconds per run, most of it the solver. In every case where the tool and arguments were
+right (25 questions per run, 75 in total), the tool output was identical to a direct call of the solver.
+
+n = 30 is small. Two-sided Fisher exact tests (computed with `math.comb`) for the language model against the baseline:
+overall 28/30 against 23/30 gives p = 0.1455, so that difference could be chance. On the 25 answerable questions only,
+25/25 against 19/25 gives p = 0.0223. That is below 0.05, but 25 questions are a small sample and the questions are
+not independent of each other, so I treat it as a hint and not as proof.
 
 **Where the language model is better.** It passes all 25 answerable questions. The baseline fails
 six of them, for example on "machine four" (spelled-out number), "ft 20" (a space in the name),
@@ -167,8 +190,8 @@ docker compose up -d postgres
 .venv/Scripts/python -m pytest
 ```
 
-92 tests. They create their own database (`sched_test`). They include: frozen operations unchanged,
-valid plans, no approval means no write, reject means no write, a paused proposal survives an API
+117 tests. They create their own database (`sched_test`). They include: frozen operations unchanged,
+valid plans, an earlier breakdown stays in force, no approval means no write, reject means no write, a paused proposal survives an API
 restart, answer numbers equal tool output, and an invented number is caught. As a check on the tests
 themselves, I broke the approval rule and the freeze rule on purpose and the tests failed.
 
@@ -182,6 +205,21 @@ themselves, I broke the approval rule and the freeze rule on purpose and the tes
 - **Disruption rule.** Operations that started before the breakdown keep their start time. If one is still
   running on the broken machine, it finishes first and the breakdown starts after it.
 
+## Determinism
+
+The base plan and every disruption use one worker and a fixed seed, so the same question gives the same
+plan. `solve` and `compare` use several workers, so the schedule can differ between runs, while the optimal
+makespan does not. The evaluation is built so that this does not matter: the model sees and the checks
+compare the numbers of the tool output (makespan, gap, status, counts), not the list of operations.
+
+`evals/checks.py` compares two things. First, every number in the model's answer must also appear in the tool
+output or in the question, rounded to the number of decimals the answer shows (so "18%" matches 18.18, "19"
+does not); instance names such as ft06 are ignored. It does not check whether a sentence is true or
+complete. Second, the tool arguments must equal the expected ones exactly, whole numbers compared as whole
+numbers, and extra or missing keys count as wrong. The separate check "tool output equals a direct solver
+call" is in `evals/run.py`: it compares the tool output with a direct call of the solver, ignoring the
+timing fields.
+
 ## Limits
 
 - Times have no unit in the benchmark data, so durations like "2 hours" cannot be converted. The copilot
@@ -194,7 +232,13 @@ themselves, I broke the approval rule and the freeze rule on purpose and the tes
   reschedule also uses one worker and a fixed seed, so the same question always gives the same plan. Several
   different schedules can share the best makespan, and the solver does not try to keep the number of moved
   operations small.
-- There is no authentication on the API. Do not expose it to the internet.
+- Plans committed before the `disruptions` column existed have no stored windows, so a later breakdown only
+  knows the windows of plans saved after the change. An existing database gets the column when you run
+  `db/init.sql` once more:
+  `docker compose exec -T postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"' < db/init.sql`.
+- Two proposals made from the same base plan can both be approved. The second one ignores the first.
+- There is no authentication on the API. The reviewer name is whatever the request says. Do not expose it
+  to the internet.
 
 ## Data source and licence
 

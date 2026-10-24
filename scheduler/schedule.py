@@ -7,6 +7,31 @@ def makespan(schedule):
     return max(op["end"] for op in schedule) if schedule else 0
 
 
+def as_window_list(blocked):
+    """None, one window or a list of windows, always returned as a list."""
+    if not blocked:
+        return []
+    if isinstance(blocked, dict):
+        return [blocked]
+    return list(blocked)
+
+
+def merge_windows(blocked):
+    """Join windows of the same machine that overlap or touch.
+
+    Two fixed intervals that overlap on one machine would make the solver model infeasible,
+    so the solver only gets the merged windows.
+    """
+    merged = []
+    for window in sorted(as_window_list(blocked), key=lambda w: (w["machine"], w["start"], w["end"])):
+        last = merged[-1] if merged else None
+        if last and last["machine"] == window["machine"] and window["start"] <= last["end"]:
+            last["end"] = max(last["end"], window["end"])
+        else:
+            merged.append({"machine": window["machine"], "start": window["start"], "end": window["end"]})
+    return merged
+
+
 def gap_percent(value, best):
     """How far above the best-known makespan a value is, in percent."""
     return round(100.0 * (value - best) / best, 2)
@@ -15,8 +40,8 @@ def gap_percent(value, best):
 def validate(instance, schedule, blocked=None):
     """Return a list of problems. An empty list means the schedule is valid.
 
-    blocked is an optional dict {"machine": m, "start": s, "end": e}: no operation
-    may run on that machine inside that window.
+    blocked is optional: one dict {"machine": m, "start": s, "end": e} or a list of them.
+    No operation may run on that machine inside such a window.
     """
     problems = []
     by_key = {(op["job"], op["op"]): op for op in schedule}
@@ -43,9 +68,9 @@ def validate(instance, schedule, blocked=None):
             if second["start"] < first["end"]:
                 problems.append(f"machine {machine}: two operations overlap at time {second['start']}")
 
-    if blocked:
+    for window in as_window_list(blocked):
         for op in schedule:
-            if op["machine"] == blocked["machine"] and op["start"] < blocked["end"] and op["end"] > blocked["start"]:
-                problems.append(f"job {op['job']} op {op['op']} runs while machine {blocked['machine']} is down")
+            if op["machine"] == window["machine"] and op["start"] < window["end"] and op["end"] > window["start"]:
+                problems.append(f"job {op['job']} op {op['op']} runs while machine {window['machine']} is down")
 
     return problems

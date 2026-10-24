@@ -38,8 +38,11 @@ def count_moved(base_schedule, new_schedule, frozen):
     return moved
 
 
-def disrupt(instance, base_schedule, machine, start, duration, time_limit=20.0, workers=1):
+def disrupt(instance, base_schedule, machine, start, duration, time_limit=20.0, workers=1, earlier_windows=None):
     """Reschedule after the machine is down from `start` for `duration` time units.
+
+    earlier_windows are the breakdown windows of earlier approved disruptions. They stay in force,
+    so the new plan cannot use a machine during an earlier outage.
 
     One worker and a fixed seed, so the same question always gives the same plan. With several
     workers, different schedules with the same makespan can come out, and the number of moved
@@ -47,6 +50,7 @@ def disrupt(instance, base_schedule, machine, start, duration, time_limit=20.0, 
     """
     frozen = find_frozen(base_schedule, start)
     window = breakdown_window(frozen, machine, start, duration)
+    all_windows = list(earlier_windows or []) + [window]
     frozen_starts = {(op["job"], op["op"]): op["start"] for op in frozen}
 
     result = cp_sat_solver.solve_instance(
@@ -54,14 +58,15 @@ def disrupt(instance, base_schedule, machine, start, duration, time_limit=20.0, 
         time_limit=time_limit,
         workers=workers,
         frozen=frozen_starts,
-        blocked=window,
+        blocked=all_windows,
         earliest_start=start,
         hint=base_schedule,
     )
 
     old_makespan = makespan(base_schedule)
     if result["makespan"] is None:
-        return {"feasible": False, "old_makespan": old_makespan, "window": window, "status": result["status"]}
+        return {"feasible": False, "old_makespan": old_makespan, "window": window, "windows": all_windows,
+                "status": result["status"]}
 
     return {
         "feasible": True,
@@ -72,6 +77,7 @@ def disrupt(instance, base_schedule, machine, start, duration, time_limit=20.0, 
         "operations_frozen": len(frozen),
         "operations_moved": count_moved(base_schedule, result["schedule"], frozen),
         "window": window,
+        "windows": all_windows,
         "solve_time_s": result["solve_time_s"],
         "schedule": result["schedule"],
     }

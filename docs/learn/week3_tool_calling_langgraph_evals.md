@@ -45,7 +45,9 @@ choose tool -> run tool -> explain -> (is it a new plan?) -> request approval ->
 - `interrupt()` in the approval step **pauses** the graph and returns the proposal to the caller.
 - The state is stored by a **checkpointer** (Postgres), so the pause can last minutes and survives a restart.
 - The human calls the API with approve or reject. The graph **resumes** and the last step either saves the
-  plan or only logs the rejection.
+  plan or only logs the rejection. The reviewer name is whatever the request says; the API does not
+  authenticate it. The saved plan also stores all breakdown windows that apply to it, so a later breakdown
+  cannot use a machine during an earlier outage.
 - One detail: when a graph resumes, the node that paused starts again from its first line. So the approval
   node contains only the interrupt; the audit entry is written in the step before it.
 
@@ -76,6 +78,16 @@ A note on our own process. The first version of the question set was too tidy: t
 natural phrasing and did not touch the baseline. It now scores 23 out of 30. A test that everything passes
 is a test that proves nothing.
 
+**Runs and significance.** The 30 questions were written by Claude Code. The model evaluation was run three
+times (24 Oct 2026, `openai/gpt-oss-20b`, temperature 0). All three runs gave 28/30 for the model and 23/30 for the
+baseline, with the same answers per question, and each run is saved in `evals/runs/`. With n = 30 a difference of
+five questions can be chance. A two-sided Fisher exact test, computed with `math.comb`, gives p = 0.1455 for
+28/30 against 23/30 and p = 0.0223 for the answerable questions only (25/25 against 19/25).
+
+**Determinism.** The base plan and every disruption use one worker and a fixed seed, so the same question gives the
+same plan. `solve` and `compare` use several workers, so their schedule can differ between runs while the optimal
+makespan does not. The checks compare numbers of the tool output (and the tool arguments), not the schedule.
+
 ## 2. Code walkthrough
 
 **`agent/tools.py`** lists the three tools for the model and checks every argument: the instance must exist,
@@ -95,8 +107,8 @@ so what is measured is exactly what the API runs.
 **`api/main.py`** adds `/ask` (starts a graph run), `/approvals/{thread_id}` (resumes it), `/threads/{id}`,
 `/plans`, `/audit` and the Gantt PNGs.
 
-**`evals/`**: `questions.json` (the 30 questions), `checks.py` (the faithfulness check), `run.py` (the runner
-and the results table).
+**`evals/`**: `questions.json` (the 30 questions), `checks.py` (the faithfulness check), `run.py` (the runner,
+the results table and the saved runs) and `stats.py` (the Fisher exact test).
 
 **Tests** include: an unapproved plan is never written; reject writes nothing; approve writes exactly the
 proposed plan; the paused conversation survives an API restart; the model cannot change a schedule; bad
@@ -136,7 +148,9 @@ approval rule on purpose to confirm that the tests fail when it is broken.
 
 9. **How did you measure the agent?**
    30 questions with ground truth from the solver, three metrics (tool, arguments, numbers faithful) and a
-   regex baseline for comparison.
+   regex baseline for comparison. I ran it three times and saved each run. The language model scored 28/30
+   and the baseline 23/30 every time. The 5-question gap is not significant overall (p = 0.1455); on the answerable
+   questions only it is (p = 0.0223), but the sample is small.
 
 10. **Where does the approach fail?**
     Incomplete or ambiguous questions, wrong units (hours instead of the instance's time units), spelled-out
